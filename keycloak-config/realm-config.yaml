@@ -1,0 +1,67 @@
+# keycloak-config/realm-config.yaml
+realm: master
+enabled: true
+displayName: My Service Provider Realm
+loginTheme: keycloak
+accessTokenLifespan: 300
+
+smtpServer:
+  host: smtp.gmail.com
+  port: 587
+  from: francys1010@gmail.com
+  fromDisplayName: Service Provider
+  replyTo: francys1010@gmail.com
+  replyToDisplayName: Service Provider Support
+  auth: true
+  user: ${env.SMTP_USER}
+  password: ${env.SMTP_PASS}
+  ssl: false
+  starttls: true
+
+clients:
+  - clientId: service-provider
+    enabled: true
+    publicClient: false
+    standardFlowEnabled: true
+    implicitFlowEnabled: false
+    directAccessGrantsEnabled: true
+    serviceAccountsEnabled: true
+    authorizationServicesEnabled: true
+    redirectUris:
+      - "http://localhost:3000/*"
+    webOrigins:
+      - "http://localhost:3000"
+    protocol: openid-connect
+    attributes:
+      post.logout.redirect.uris: "http://localhost:3000"
+    clientAuthenticator: client-secret
+    secret: your-client-secret
+
+users:
+  - username: admin
+    enabled: true
+    emailVerified: true
+    credentials:
+      - type: password
+        value: admin123
+        temporary: false
+    realmRoles:
+      - admin
+    attributes:
+      firstName: Admin
+      lastName: User
+      email: admin@example.com
+
+roles:
+  realm:
+    - name: admin
+      description: Administrator role
+    - name: user
+      description: Regular user role
+
+requiredActions:
+  - alias: VERIFY_EMAIL
+    name: Verify Email
+    enabled: true
+    defaultAction: true
+    priority: 50
