@@ -87,11 +87,11 @@ app.get('/', (req, res) => {
     `);
   } else {
     res.send(`
-      <h1>Welcome to Service Provider</h1>
+      <h1>Service Provider - Francys</h1>
       <div>
         <a href="/login">Login</a>
         <span> | </span>
-        <a href="/register">Register</a>
+        <a href="/register">Registrar</a>
       </div>
     `);
   }

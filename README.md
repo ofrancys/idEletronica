@@ -31,12 +31,10 @@ Em seguida, navegue até o diretório do projeto e o abra no VS Code.
 
 ### Passo 2: Habilite o envio de e-mails no Keycloak
 
-Abra o arquivo `realm-config.yaml` localizado no diretório `keycloak-config`. Navegue até o final do arquivo e substitua a configuração SMTP por uma configuração válida, ou se preferir, desabilite o envio de e-mails alterando o valor da propriedade para `verifyEmail: false` conforme o exemplo abaixo:
+Abra o arquivo `realm-config.yaml` localizado no diretório `keycloak-config`. Navegue até o final do arquivo e substitua a configuração SMTP por uma configuração válida,conforme o exemplo abaixo:
 
 ```json
   "smtpServer": {
-    "replyToDisplayName": "",
-    "starttls": "true",
     "auth": "true",
     "envelopeFrom": "",
     "ssl": "false",
@@ -63,7 +61,6 @@ docker-compose up -d
 ### Passo 4: Acessar o Service Provider
 
 Acesse a aplicação no navegador através do endereço `http://localhost:3001`.
-Se houver algum erro pode entrar diretamente no diretório adm do Keycloak `http://localhost:8080/realms/master/protocol/openid-connect/auth?client_id=security-admin-console&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fadmin%2Fmaster%2Fconsole%2F%23%2Fmaster%2Frealm-settings%2Femail&state=8dd63f38-58a5-497f-8f20-3bc7c21fd7ed&response_mode=query&response_type=code&scope=openid&nonce=fdd685bb-8ed0-4a57-b8ba-415a9f4a6832&code_challenge=8WLyKOPaFkF-OLIXH_RXSTOiTxI1blvwW0iUfkD6nTM&code_challenge_method=S256`
 
 Realize o cadastro de um novo usuário e faça o login utilizando as credenciais cadastradas, se tudo ocorrer corretamente você será redirecionado para a página de informações do usuário autenticado.
 
@@ -79,3 +76,4 @@ Realize o cadastro de um novo usuário e faça o login utilizando as credenciais
 
 A configuração do SMTP_PASS do arquivo `.env` dentro do diretório `service-provider` deve ser feita de acordo com sua conta no Google. 
 É necessário gerar uma senha de 16 digitos em Senhas do App, com a url `gmail.com`, essa senha deve ser usada no SMTP_PASS.
+Se houver algum erro pode entrar diretamente no diretório adm do seu realm do Keycloak `http://localhost:8080/admin/master/console/#/maste
