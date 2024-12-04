@@ -70,8 +70,9 @@ async function getAccessToken(code) {
 
 // app.use(passport.initialize());
 // app.use(passport.session());
+const cookieParser = require("cookie-parser");
 
-app.use(express.cookieParser());
+app.use(cookieParser);
 
 // Função para gerar PKCE code verifier e challenge
 // function generatePKCE() {
