@@ -46,13 +46,13 @@ services:
 
   service-provider:
     build:
-      context: ./service-provider
+      context: ./
       dockerfile: Dockerfile
     container_name: service-provider
     ports:
       - "3000:3000"
     environment:
-      KEYCLOAK_BASE_URL: ${KEYCLOAK_URL}
+      KEYCLOAK_BASE_URL: ${KEYCLOAK_BASE_URL}
       KEYCLOAK_REALM: ${KEYCLOAK_REALM}
       KEYCLOAK_CLIENT_ID: ${KEYCLOAK_CLIENT_ID}
       KEYCLOAK_CLIENT_SECRET: ${KEYCLOAK_CLIENT_SECRET}
@@ -60,9 +60,9 @@ services:
       NODE_ENV: ${NODE_ENV}
       PORT: ${PORT}
       APP_HOST: ${APP_HOST}
-    volumes:
-      - ./service-provider:/app
-      - /app/node_modules
+    # volumes:
+    #   - ./service-provider:/app
+    #   - /app/node_modules
     depends_on:
       - keycloak
     networks:
