@@ -45,19 +45,21 @@ services:
       - keycloak-network
 
   service-provider:
-    build: 
+    build:
       context: ./service-provider
       dockerfile: Dockerfile
     container_name: service-provider
     ports:
-      - "3001:3000"
+      - "3000:3000"
     environment:
-      - KEYCLOAK_URL=http://localhost:8080
-      - KEYCLOAK_REALM=master
-      - KEYCLOAK_CLIENT_ID=francys-ie
-      - KEYCLOAK_CLIENT_SECRET=n1tBkGY2ZbPnQoYzA1KbQlzEDjLmhg7S
-      - SESSION_SECRET=chave_sessionSecret
-      - NODE_ENV=development
+      KEYCLOAK_BASE_URL: ${KEYCLOAK_URL}
+      KEYCLOAK_REALM: ${KEYCLOAK_REALM}
+      KEYCLOAK_CLIENT_ID: ${KEYCLOAK_CLIENT_ID}
+      KEYCLOAK_CLIENT_SECRET: ${KEYCLOAK_CLIENT_SECRET}
+      KEYCLOAK_REDIRECT_URI: ${KEYCLOAK_REDIRECT_URI}
+      NODE_ENV: ${NODE_ENV}
+      PORT: ${PORT}
+      APP_HOST: ${APP_HOST}
     volumes:
       - ./service-provider:/app
       - /app/node_modules
