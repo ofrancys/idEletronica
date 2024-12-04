@@ -24,7 +24,7 @@ services:
   keycloak:
     image: quay.io/keycloak/keycloak:26.0.4
     container_name: keycloak
-    command: start-dev
+    command: start-dev --spi-login-protocol-openid-connect-legacy-logout-redirect-uri=true --import-realm
     environment:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
@@ -60,9 +60,8 @@ services:
       NODE_ENV: ${NODE_ENV}
       PORT: ${PORT}
       APP_HOST: ${APP_HOST}
-    # volumes:
-    #   - ./service-provider:/app
-    #   - /app/node_modules
+    volumes:
+    - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json:ro
     depends_on:
       - keycloak
     networks:
